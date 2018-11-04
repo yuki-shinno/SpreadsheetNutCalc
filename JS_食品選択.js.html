@@ -16,7 +16,9 @@
     $.blockUI({ message: 'please wait' });
     google.script.run.withSuccessHandler(unBlock).addFood(ary);
   }
-  
+  function よく使う食品の編集(){
+    google.script.run.showModalOftenUseFood();
+  }
   function よく使う食品へ追加グループ(){
     $.blockUI({ message: 'please wait' });
     var Group = $('#select-list').val();

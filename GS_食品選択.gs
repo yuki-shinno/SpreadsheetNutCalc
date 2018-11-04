@@ -72,15 +72,33 @@ function よく使う食品の表示(){
   for(var line=0; line < foodNumberList.length; line++){
     for(var i=1;i<myData.length-1; i++){
       if(myData[i][1].indexOf(foodNumberList[line]) != -1){
-        Logger.log("data");
         myStr += '<option value="' + myData[i][FoodName] +',' +  myData[i][FoodNomber] +'">' + myData[i][FoodNomber] + ' ' + myData[i][FoodName] + '</option><br>';
       }
     }
   }
   myStr += '<br>' + '</select><span class="input-group-btn"><button onClick="addFood()" id="btn-19" class="btn btn-default btn-add">選択</button>'
-  myStr += '<button onClick="" class="btn action">よく使う食品を編集する</button></span></div>';
+  myStr += '<button onClick="よく使う食品の編集()" class="btn action">よく使う食品を編集する</button></span></div>';
   return myStr;
 }
+
+function よく使う食品の表示モーダル(){
+  var myData = onStart();
+  const FoodGroup = 0;
+  const FoodNomber = 1;
+  const FoodName = 3;
+  var myStr = '<ul>';
+  var foodNumberList = PropertiesService.getUserProperties().getProperty("よく使う食品").split(',');
+  for(var line=0; line < foodNumberList.length; line++){
+    for(var i=1;i<myData.length-1; i++){
+      if(myData[i][1].indexOf(foodNumberList[line]) != -1){
+//        myStr += '<li>'+ myData[i][FoodName] + '<button onClick="">'<> +'<li>';
+      }
+    }
+  }
+  myStr += '</ul>'
+  return myStr;
+}
+
   
 //スプレッドシートへの食品の追加
 function addFood(ary){
