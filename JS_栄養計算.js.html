@@ -1,0 +1,251 @@
+<script>
+  //食品番号などを検索し、MWに表示
+  $(function(){
+    window.onload =function(e){
+      google.script.run.withSuccessHandler(onSuccess1).serchToWindow(); 
+      };
+      function onSuccess1(res){
+        $('#food-number-col').val(NumToABC(res[0])); //列として表示するものは数字を変換している。
+        $('#weight-col').val(NumToABC(res[1]));
+        $('#row-weight-start').val(res[2]);
+        $('#row-weight-end').val(res[3]);
+        $('#row-sum').val(res[4]);
+      }})
+  
+  //成績表の表示チェックボックスが変更された際の処理
+  $(function(){
+    $('#result-table-check').change(function(){
+      if($(this).is(':checked')){
+        $('#result-table').show();
+      }else {
+        $('#result-table').hide();
+      }
+    })
+  })
+  
+//  ボタンOKを押した際の処理
+$(function(){
+  $('#btn-OK').click(function(){
+    try{
+      var colFoodNumber = $('#food-number-col').val();
+      var colWeight = $('#weight-col').val();
+      var rowStart = $('#row-weight-start').val();
+      var LastRow = $('#row-weight-end').val();
+      var rowSum = $('#row-sum').val();
+      var isResRefChk = $('#result-check').prop('checked');
+      var isResTabChk = $('#result-table-check').prop('checked');
+      var name = $('#name').val();
+      var age = $('#age').val();
+      var height = $('#height').val();
+      var weight = $('#weight').val();
+      var sex = $('#sex').val();
+      
+      //初期設定
+      $('#msg-name').hide();
+      $('#msg-age').hide();
+      $('#msg-weight').hide();
+      $('#msg-height').hide();
+      $('#msg-number-col').hide();
+      $('#msg-weight-row').hide();
+      $('#msg-weight-start-row').hide();
+      $('#msg-weight-end-row').hide();
+      $('#msg-sum-row').hide();
+      $('#input-name').removeClass('has-error');
+      $('#input-age').removeClass('has-error');
+      $('#input-height').removeClass('has-error');
+      $('#input-weight').removeClass('has-error');
+      $('#food-number-input').removeClass('has-error');
+      $('#weight-col-input').removeClass('has-error');
+      $('#weight-start-row-input').removeClass('has-error');
+      $('#weight-end-row-input').removeClass('has-error');
+      $('#sum-input').removeClass('has-error');
+
+      //ウインドウの値が正しくない場合の処理
+      if(colFoodNumber == ""　| isNaN(ABCtoNum(colFoodNumber))==true){
+        $('#msg-number-col').show();
+        $('#food-number-input').addClass('has-error');
+        var errFlg = true;
+      }
+      if(colWeight == "" | isNaN(ABCtoNum(colWeight))==true){
+        $('#msg-weight-col').show();
+        $('#weight-col-input').addClass('has-error');
+        var errFlg = true;
+      }
+      
+      if(rowStart == "" | isNaN(rowStart)==true){
+        $('#msg-weight-start-row').show();
+        $('#weight-start-row-input').addClass('has-error');
+        var errFlg = true;
+      }
+      
+      if(LastRow == "" | isNaN(LastRow)==true){
+        $('#msg-weight-end-row').show();
+        $('#weight-end-row-input').addClass('has-error');
+        var errFlg = true;
+      }
+      if(rowSum == "" | isNaN(rowSum)==true){
+        $('#msg-sum-row').show();
+        $('#sum-input').addClass('has-error');
+        var errFlg = true;
+      }
+
+      //成績表が入力されていない場合の処理
+      if(isResTabChk==true){
+        if(name==""){
+          $('#msg-name').show();
+          $('#input-name').addClass('has-error');
+          var errFlg = true;
+        }
+        if(age==""){
+          $('#msg-age').show();
+          $('#input-age').addClass('has-error');
+          var errFlg = true;
+        }
+        if(height==""){
+          $('#msg-height').show();
+          $('#input-height').addClass('has-error');
+          var errFlg = true;
+        }
+        if(weight==""){
+          $('#msg-weight').show();
+          $('#input-weight').addClass('has-error');
+          var errFlg = true;
+        }
+      }
+      if(errFlg==true){
+          return;
+      }
+      $.blockUI({message: '<p>処理中です</p>' });
+      var myRes = [];
+      myRes.push(ABCtoNum(colFoodNumber));
+      myRes.push(ABCtoNum(colWeight));
+      myRes.push(rowStart);
+      myRes.push(Number(LastRow));
+      myRes.push(rowSum);
+      myRes.push(isResRefChk);
+      myRes.push(isResTabChk);
+      myRes.push(name);
+      myRes.push(age);
+      myRes.push(height);
+      myRes.push(weight);
+      myRes.push(sex);
+      google.script.run.withSuccessHandler(onSuccess2).栄養計算1(myRes)}catch(e){
+         google.script.run.withSuccessHandler(onErr).showMsgBox('エラーが発生しました');  
+      }})
+        //ここからGoogleAppsScript
+        function onSuccess2(){
+          google.script.run.withSuccessHandler(onSuccess3).showMsgBox('計算が終了しました');  
+        }
+        function onSuccess3(){
+          google.script.host.close();
+        }
+        function onErr(){
+          unblockUI();
+          return;
+        }
+      })
+    
+  
+//  数字とアルファベットを変更する際の処理
+  function ABCtoNum(str){
+  start();
+  for(var i=0;i<78;i++){
+    if(myData[i][0] === str){
+      return myData[i][1];
+    }
+  }
+}
+
+function NumToABC(value){
+  start();
+  for(var i=0;i<78;i++){
+    if(myData[i][1] === value){
+      return myData[i][0];
+    }
+  }
+}
+
+function start(){
+  myData = [
+ ['A',1]
+,['B',2]
+,['C',3]
+,['D',4]
+,['E',5]
+,['F',6]
+,['G',7]
+,['H',8]
+,['I',9]
+,['J',10]
+,['K',11]
+,['L',12]
+,['M',13]
+,['N',14]
+,['O',15]
+,['P',16]
+,['Q',17]
+,['R',18]
+,['S',19]
+,['T',20]
+,['U',21]
+,['V',22]
+,['W',23]
+,['X',24]
+,['Y',25]
+,['Z',26]
+,['AA',27]
+,['AB',28]
+,['AC',29]
+,['AD',30]
+,['AE',31]
+,['AF',32]
+,['AG',33]
+,['AH',34]
+,['AI',35]
+,['AJ',36]
+,['AK',37]
+,['AL',38]
+,['AM',39]
+,['AN',40]
+,['AO',41]
+,['AP',42]
+,['AQ',43]
+,['AR',44]
+,['AS',45]
+,['AT',46]
+,['AU',47]
+,['AV',48]
+,['AW',49]
+,['AX',50]
+,['AY',51]
+,['AZ',52]
+,['BA',53]
+,['BB',54]
+,['BC',55]
+,['BD',56]
+,['BE',57]
+,['BF',58]
+,['BG',59]
+,['BH',60]
+,['BI',61]
+,['BJ',62]
+,['BK',63]
+,['BL',64]
+,['BM',65]
+,['BN',66]
+,['BO',67]
+,['BP',68]
+,['BQ',69]
+,['BR',70]
+,['BS',71]
+,['BT',72]
+,['BU',73]
+,['BV',74]
+,['BW',75]
+,['BX',76]
+,['BY',77]
+,['BZ',78]];
+}
+</script>
+
+

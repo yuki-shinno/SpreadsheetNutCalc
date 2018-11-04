@@ -1,0 +1,98 @@
+<script>
+  //食品の追加ボタンが押された時の処理
+  function addFood(){
+    $.blockUI({ message: 'please wait' });
+    var Group = $('#select-list').val();
+    var ary = $('#select-' + Group).val().split(",");
+    google.script.run.withSuccessHandler(unBlock).addFood(ary);
+  }
+  function 検索からの食品の追加(){
+    var ary = $('#select-serch-result').val().split(",");
+    if(ary[0]==""){
+      $('#msg-none-food').show();
+      return;
+    };
+    $('#msg-none-food').hide();
+    $.blockUI({ message: 'please wait' });
+    google.script.run.withSuccessHandler(unBlock).addFood(ary);
+  }
+  
+  function よく使う食品へ追加グループ(){
+    $.blockUI({ message: 'please wait' });
+    var Group = $('#select-list').val();
+    var ary = $('#select-' + Group).val().split(",");
+    google.script.run.withSuccessHandler(unBlock).よく使う食品へ追加(ary);
+  }
+  function よく使う食品へ追加サーチ(){
+    $.blockUI({ message: 'please wait' });
+    var ary = $('#select-serch-result').val().split(",");
+    google.script.run.withSuccessHandler(unBlock).よく使う食品へ追加(ary);
+  }
+  
+  function unBlock(){
+    $.unblockUI();
+  }
+  
+  //検索ボックスの食品の追加が押された際の処理
+  $( '#addr' ).keypress( function ( e ) {
+	if ( e.which == 13 ) {
+		// ここに処理を記述
+		return false;
+	}
+  });
+    
+  //検索ボタンが押された際に、サーチボックスを表示する
+  function onEnter(e){
+    if(e.keyCode  == 13){
+      onSearch();
+    }
+  }
+  function onSearch(){
+    var searchText = $('#search-box').val();
+    if(searchText==""){
+      $('#serch-result-text').removeClass();
+      $('#serch-result-icon').removeClass();
+      $('#serch-result-text').html('テキストを入力してください');
+      $('#serch-result-text').addClass('error');
+      $('#serch-result-icon').addClass('error fa fa-exclamation-triangle');
+      $('#serch-div').hide();
+      $.unblockUI();
+      return;
+    }
+    $.blockUI({ message: '<p>please wait</p>' });
+    google.script.run.withSuccessHandler(onSuccess3).serchFood(searchText);
+  }
+  
+  function onSuccess3(res){
+    $('#serch-div').show('slow');
+    $('#select-serch-result').empty();//検索結果の表示リストをからにする
+    if(res==='notFound'){
+      $('#serch-result-text').removeClass();
+      $('#serch-result-icon').removeClass();
+      $('#serch-result-text').html('見つかりませんでした');
+      $('#serch-result-text').addClass('error');
+      $('#serch-result-icon').addClass('error fa fa-exclamation-triangle');
+      $('#serch-div').hide();
+      $.unblockUI();
+      return;
+    }else{
+      $('#serch-result-text').removeClass();
+      $('#serch-result-icon').removeClass();
+      $('#serch-result-text').addClass('success');
+      $('#serch-result-icon').addClass('success fa fa-check-circle');
+      $('#serch-result-text').html(res.length + '件の食品が見つかりました');
+      $('#select-serch-result').append(res);
+      $.unblockUI();
+    }
+  }
+  
+  //食品群の表示を切り替える
+  $(function(){
+    $('#select-list').change(function(e){
+    for(var i=0;i<20;i++){
+      $('#'+ i).hide();
+    }
+    var val = $('[name=select-food-group]').val();
+    $('#'+val).show('slow');
+  })})
+</script>

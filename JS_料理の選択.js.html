@@ -1,0 +1,35 @@
+<script>
+$(function(){
+    google.script.run.withSuccessHandler(refMealList).addMealBySheet();
+  function refMealList(ret){
+    var mealList = ret;
+    var str = "";
+    str += "<select style='width:100%' id='select-meal' class='form-control'>";
+    for(var i=0;i<mealList.length;i++){
+      str += '<option>' + mealList[i] + "</option>"
+    }
+    str += '</select> <button onClick="addMealToSheet()" class="btn btn-default btn-add">選択</button>';
+    $('#meal-list').append(str);
+  };
+})
+  function addMealToSheet(){
+    $.blockUI({ message: '<p>処理中です</p>' });
+    //料理名の取得
+    var mealName = $('#select-meal').val();
+    google.script.run.withSuccessHandler(onSuc).addMealToSheet(mealName);
+  };
+  function onSuc(ret){
+    $.unblockUI();
+    if(ret=="not found"){
+      google.script.run.showMsgBox("項目行が見つかりません。 \n 最初に項目行を表示してください。");
+    }else{
+    if(ret=="under"){
+      google.script.run.showMsgBox("項目行かそれより上が選択されています。 \n 項目行より下のセルを選択してください。");
+    }else{
+      google.script.run.showMsgBox("処理が完了しました。");
+    }
+  }
+  }
+</script>
+
+

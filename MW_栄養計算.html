@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">     
+    <?!= include('TM_Header.html'); ?>
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row row-eq-height" style='height:35px;'>
+          <div class="col-xs-6"><span class="glyphicon glyphicon-check " aria-hidden="true"><strong>食品コード列</strong></span></div>
+          <div class="col-xs-6"><span class="glyphicon glyphicon-check" aria-hidden="true"><strong>重量</strong></span></div>
+         </div>
+         <div class='row row-eq-height' style='height:35px;'>
+           <div class="col-xs-2 text-right"><p>列</p></div>
+           <div class="col-xs-2" id="food-number-input"><input type='text' id='food-number-col' class='form-control input-sm' required></div>
+           <div class="col-xs-2 col-xs-offset-2 text-right"><p>列</p></div>
+           <div class="col-xs-2" id="weight-col-input"><input type='text' id='weight-col' class='form-control input-sm' required></div>
+         </div>
+         <div class='row row-eq-height' style='height:35px;'>
+           <div class="col-xs-6"><span class="glyphicon glyphicon-check" aria-hidden="true"><strong>合計行</strong></span></div>
+           <div class="col-xs-2  text-right"><p>開始行</p></div>
+           <div class="col-xs-2" id="weight-start-row-input" ><input type='number' id='row-weight-start' class='form-control input-sm' required></div>
+         </div>
+         <div class='row row-eq-height' style='height:35px;'>
+           <div class="col-xs-2 text-right"><p>表示行</p></div>
+           <div class="col-xs-2" id="sum-input"><input type='number' id='row-sum' class='form-control input-sm' required></div>
+           <div class="col-xs-2 col-xs-offset-2 text-right"><p>終了行</p></div>
+           <div class="col-xs-2" id="weight-end-row-input"><input type='number' id='row-weight-end' class='form-control input-sm' required></div>
+         </div>
+         <div class='row err-msg' id="msg-number-col">
+           <div class="col-xs-12 text-danger" >*食品コード列が正しくありません。</div>
+         </div>
+         <div class='row err-msg' id="msg-weight-col">
+           <div class="col-xs-12 text-danger" >*重量列が正しくありません。</div>
+         </div>
+         <div class='row err-msg' id="msg-weight-start-row">
+           <div class="col-xs-12 text-danger" >*重量の開始行が正しくありません。</div>
+         </div>
+         <div class='row err-msg' id="msg-weight-end-row">
+           <div class="col-xs-12 text-danger" >*重量の終了行が正しくありません。</div>
+         </div>
+         <div class='row err-msg' id="msg-sum-row">
+           <div class="col-xs-12 text-danger" >*合計の表示行が正しくありません。</div>
+         </div>
+         <div class='row' style='height:10px;'></div>
+         
+         <div class='row row-eq-height' style='height:35px;'>
+           <div class='col-xs-12'>
+             <div><input type="checkbox" id='result-check' value="checkboxB"><label for="result-check">栄養素等表示基準値を表示する</label></div>
+           </div>
+         </div>
+         <div class='row row-eq-height' style='height:40px;'>
+           <div class='col-xs-12'>
+             <div><input type="checkbox" id='result-table-check' value="checkboxC"><label for="result-table-check">成績表を作成する</label></div>
+           </div>
+         </div>
+         <div id="result-table" style="display:none">
+           <div class='row row-eq-height'  style='height:45px;'>
+             <div class="col-xs-2 text-right"><p>氏名</p></div>
+             <div class="col-xs-4" id="input-name"><input type='text' id='name' class='form-control' required></div>
+             <div class="col-xs-2  text-right"><p>年齢</p></div>
+             <div class="col-xs-2 input-div" id="input-age"><input type='number' id='age' class='form-control input-sm' min="1" required></div>
+             <div class="col-xs-2 unit">歳</div>
+           </div>
+           <div class='row'  style='height:45px;'>
+             <div class="col-xs-2  text-right">身長</div>
+             <div class="col-xs-2 input-div" id="input-height"><input type='number' id='height' class='form-control' min="100" max="200" required></div>
+             <div class="col-xs-2 unit"><span>cm</span></div>
+             <div class="col-xs-2 text-right">体重</div>
+             <div class="col-xs-2 input-div" id="input-weight"><input type='number' id='weight' class='form-control' min="20" max="150" required></div>
+             <div class="col-xs-2 unit">kg</div> 
+           </div>
+           <div class='row'  style='height:45px;'>
+             <div class="col-xs-2  text-right"><p>性別</p></div>
+             <div class="col-xs-3">
+               <select id="sex" >
+                 <option value="男性">男性</option>
+                 <option value="女性">女性</option>
+               </select>
+             </div>
+           </div>
+         </div>
+         <div class='row err-msg' id="msg-name">
+           <div class="col-xs-12 text-danger" >*名前が入力されていません。</div>
+         </div>
+         <div class='row err-msg' id="msg-age">
+           <div class="col-xs-12 text-danger" >*年齢が入力されていません。</div>
+         </div>
+         <div class='row err-msg' id="msg-height">
+           <div class="col-xs-12 text-danger" >*身長が入力されていません。</div>
+         </div>
+         <div class='row err-msg' id="msg-weight">
+           <div class="col-xs-12 text-danger" >*体重が入力されていません。</div>
+         </div>
+         <div class='row row-eq-height'style='height:20px;'></div>
+         <div class='row row-eq-height' style='height:40px;'>
+           <div class='col-xs-4'><button type="button" class="btn-block">キャンセル</button></div>
+           <div class='col-xs-4 col-xs-offset-4'><button class="action btn-block" id='btn-OK'>栄養計算</button></div>
+         </div>
+    </div>
+  <?!= include('JS_栄養計算.js.html'); ?>
+  <?!= include('JS_BlackUI.js.html'); ?>
+  
+  <style>
+    .err-msg{
+      display:none;
+      height:20px
+    }
+    .unit{
+      padding:12px 0px 0px 5px; height:35px;
+    }
+    .input-div{
+      padding:0px 0px 0px 15px;
+    }
+  </style>
+  </body>
+</html>
+
+

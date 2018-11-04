@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <base target="_top">
+  </head>
+  <body>
+<div class='container'>
+<form>
+  <div class="form-group">
+    <label>表示行</label>
+    <input type="text" required=true id="box-row" class="form-control" pattern="[0-9]{1,}">
+    <span id="helpBlock" class="help-block">半角数字で入力してください</span>
+
+  </div>
+  <div class="form-group">
+    <label>表示列</label>
+    <input type="text" id="box-col" required=true class="form-control"  pattern="[A-Z]{1,}">
+    <span id="helpBlock"  class="help-block">半角英字で入力してください</span>
+  </div>
+    <button type="submit" id='btn-submit' class="btn-block btn btn-primary">表示する</button>
+    <button type="button" id='btn-cancel' class="btn-block btn btn-default">キャンセル</button>
+</form>
+</div>
+  <script>
+  $(function(){
+    $('btn-submit').click(function(e){
+      return 'A';
+      google.script.host.close();
+    })
+  })
+  $(function(){
+    $('btn-cancel').click(function(e){
+      return 'A';
+      google.script.host.close();
+    })
+  })
+  </script>
+  </body>
+</html>
+
+

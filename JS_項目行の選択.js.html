@@ -1,0 +1,150 @@
+ <script>
+   //ユーザープロパティを設定する
+   $(function(){
+     $('.btn-set-property').click(function(){
+       $.blockUI({ message: '<p>処理中です</p>' });
+       var aryCheckedId = [];
+       for(var i=1;i<65;i++){
+        if($('#chk-'+i).prop('checked')==true){
+          aryCheckedId.push('chk-'+ i);
+        }}
+       google.script.run.withSuccessHandler(onSuc).setUserProperty(aryCheckedId);
+     })
+     function onSuc(){
+       $.unblockUI();
+     }
+   })
+   
+   $(function(){
+     $('.btn-get-property').click(function(){
+       $.blockUI({ message: '<p>処理中です</p>' });
+       google.script.run.withSuccessHandler(checkID).getUserProperty();
+     });
+     function checkID(res){
+      $('#chk-all-脂肪酸').prop('checked',false);
+      $('#chk-all-食物繊維').prop('checked',false);
+      $('#chk-all-ビタミンA').prop('checked',false);
+      $('#chk-all-ビタミンB').prop('checked',false);
+      $('#chk-all-ビタミンE').prop('checked',false);
+      for(var i=1;i<65;i++){
+        $('#chk-' + i).prop('checked',false);
+      }
+       for(var i=0;i<res.length;i++){
+         $('#'+res[i]).prop('checked','checked');
+       }
+       $.unblockUI();
+     google.script.run.showMsgBox('呼び出しました');
+     }
+     })
+ 
+  //btn-okを押した際の動き
+  $(function(){
+    $('.btn-ok').click(function(e){
+      $.blockUI({ message: '<p>処理中です</p>' });
+      var aryValue = ['','','',''];
+      var aryName = ['[SNC.料理名]','[SNC.食品番号]','[SNC.食品名]','[SNC.重量]'];
+      for(var i=1;i<65;i++){
+        if($('#chk-'+i).prop('checked')==true){
+          aryValue.push($('#chk-'+i).val());
+          aryName.push($('#chk-'+i).attr('name'));
+        }
+      }
+      google.script.run.withSuccessHandler(onSuc).項目行の表示(aryValue,aryName);
+    })
+      function onSuc(){
+        $.unblockUI();
+      }
+    })
+  
+  //全選択する処理
+  $(function(){
+      $('.btn-all-select').click(function(e){
+      $('#chk-all-脂肪酸').prop('checked','checked');
+      $('#chk-all-食物繊維').prop('checked','checked');
+      $('#chk-all-ビタミンA').prop('checked','checked');
+      $('#chk-all-ビタミンB').prop('checked','checked');
+      $('#chk-all-ビタミンE').prop('checked','checked');
+      for(var i=1;i<65;i++){
+        $('#chk-' + i).prop('checked','checked');
+      }
+    })
+  })
+  
+  //全クリア
+  $(function(){
+      $('.btn-all-clear').click(function(e){
+      $('#chk-all-脂肪酸').prop('checked',false);
+      $('#chk-all-食物繊維').prop('checked',false);
+      $('#chk-all-ビタミンA').prop('checked',false);
+      $('#chk-all-ビタミンB').prop('checked',false);
+      $('#chk-all-ビタミンE').prop('checked',false);
+      for(var i=1;i<65;i++){
+        $('#chk-' + i).prop('checked',false);
+      }
+    })
+  })
+  
+  //chk-allを選択した際の動き
+  $('#chk-all-食物繊維').change(function(e){
+    if($(this).is(':checked')){
+      for(var i=15;i<18;i++){
+        $('#chk-' + i).prop('checked','checked');
+      }
+    }else{
+      for(var i=15;i<18;i++){
+        $('#chk-' + i).prop('checked',false);
+      }
+    }
+  })
+  
+   $('#chk-all-脂肪酸').change(function(e){
+    if($(this).is(':checked')){
+      for(var i=9;i<12;i++){
+        $('#chk-' + i).prop('checked','checked');
+      }
+    }else{
+      for(var i=9;i<12;i++){
+        $('#chk-' + i).prop('checked',false);
+      }
+    }
+  })
+   $('#chk-all-ビタミンA').change(function(e){
+    if($(this).is(':checked')){
+      for(var i=32;i<38;i++){
+        $('#chk-' + i).prop('checked','checked');
+      }
+    }else{
+      for(var i=32;i<38;i++){
+        $('#chk-' + i).prop('checked',false);
+      }
+    }
+  })
+   $('#chk-all-ビタミンE').change(function(e){
+    if($(this).is(':checked')){
+      for(var i=39;i<43;i++){
+        $('#chk-' + i).prop('checked','checked');
+      }
+    }else{
+      for(var i=39;i<43;i++){
+        $('#chk-' + i).prop('checked',false);
+      }
+      $('#chk-64').prop('checked',false)
+    }
+  })
+
+   $('#chk-all-ビタミンB').change(function(e){
+    if($(this).is(':checked')){
+      for(var i=44;i<49;i++){
+        $('#chk-' + i).prop('checked','checked');
+      }
+      $('#chk-64').prop('checked','checked')
+    }else{
+      for(var i=44;i<49;i++){
+        $('#chk-' + i).prop('checked',false);
+      }
+      $('#chk-64').prop('checked',false);
+    }
+  })
+  </script>
+
+

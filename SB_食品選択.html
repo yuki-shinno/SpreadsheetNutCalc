@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('TM_Header.html'); ?>
+    <style>
+      .container{
+        padding:0px 20px 10px 20px;
+      }
+      select{
+        width:100%
+      }
+      hr{
+        margin:10px 0px 10px 0px;
+      }
+      #search-box{
+        height:30px;
+        width:100%;
+      }
+      #search-btn{
+        margin:5px 0px 10px 0px;
+      }
+     .btn-add{
+       margin:5px 0px;
+     }.select-food-group{
+       display:none;
+     }
+    </style>
+  </head>
+  
+  <body>
+    <br>
+    <div class='container'>
+      <p >以下のリストから食品群を選択してください</p>
+      <select class="" id='select-list' name='select-food-group'>
+        <option value='0'>※検索する</option>
+        <option value='19'>よく使う食品</option>
+        <option value='1'>01. 穀類</option>
+        <option value='2'>02. いも及びでん粉類</option>
+        <option value='3'>03. 砂糖及び甘味類</option>
+        <option value='4'>04. 豆類</option>
+        <option value='5'>05. 種実類</option>
+        <option value='6'>06. 野菜類</option>
+        <option value='7'>07. 果実類</option>
+        <option value='8'>08. きのこ類</option>
+        <option value='9'>09. 藻類</option>
+        <option value='10'>10. 魚介類</option>
+        <option value='11'>11. 肉類</option>
+        <option value='12'>12. 卵類</option>
+        <option value='13'>13. 乳類</option>
+        <option value='14'>14. 油脂類</option>
+        <option value='15'>15. 菓子類</option>
+        <option value='16'>16. し好飲料類</option>
+        <option value='17'>17. 調味料及び香辛料類</option>
+        <option value='18'>18. 調理加工食品類</option>
+      </select>
+      <hr>
+ 
+     <div id="select-box">
+        <?!= showSearchWindow()?>
+     </div>
+     <div>
+        <?!= showFoodList() ?>
+        <?!= よく使う食品の表示() ?>
+     </div>
+    </div>
+     <?!= include('JS_食品選択.js.html'); ?>
+     <?!= include('JS_BlackUI.js.html'); ?>
+  </body>
+</html>
+
+
+
+

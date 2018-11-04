@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <?!= include('TM_Header.html'); ?>
+    <style>
+      button{
+        width:100%;
+        margin-bottom:10px
+      }
+      .container{
+        padding:10px 20px 10px 20px;
+      }
+      ul{
+        padding-left:0px;
+      }
+      ul ul{
+        padding-left:20px;
+      }
+    </style>
+  </head>
+  <body>
+  <br>
+  <div class='container'>
+  <div class="block">
+    <button type="button" class="btn-all-select">全て選択</button><br>
+    <button type="button" class="btn-all-clear">全て解除</button><br>
+    <button type="button" class="btn-set-property">現在の項目行を登録する</button><br>
+    <button type="button" class="btn-get-property">登録した項目行を呼び出す</button><br>
+    <button type="button" class="action btn-ok">OK</button>
+  </div>
+  <hr>
+
+<ul style="list-style:none;">
+<li><div class="checkbox"><label><input type="checkbox" id="chk-1" value="01.廃棄率" name="(%)"/>廃棄率</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-2" value="02.エネルギー" name="(kcal/100 g)"/>エネルギー(kcal)</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-3" value="03.エネルギー" name="(kJ/100 g)"/>エネルギー(kJ)</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-4" value="04.水分" name="(g/100 g)"/>水分</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-5" value="05.たんぱく質" name="(g/100 g)"/>たんぱく質</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-6" value="06.アミノ酸組成によるたんぱく質" name="(g/100 g)"/>アミノ酸組成によるたんぱく質</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-7" value="07.脂質" name="(g/100 g)"/>脂質</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-8" value="08.トリアシルグリセロール当量" name="(g/100 g)"/>トリアシルグリセロール当量</label></div></li>
+
+<li><div class="checkbox"><label><input type="checkbox" id="chk-all-脂肪酸"/><b>脂肪酸</b></label></div>
+<ul style="list-style:none;">
+<li><div class="checkbox"><label><input type="checkbox" id="chk-9" value="09.飽和脂肪酸" name="(g/100 g)"/>飽和脂肪酸</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-10" value="10.一価不飽和脂肪酸" name="(g/100 g)"/>一価不飽和脂肪酸</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-11" value="11.多価不飽和脂肪酸" name="(g/100 g)"/>多価不飽和脂肪酸</label></div></li>
+</ul>
+</li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-12" value="12.コレステロール" name="(mg/100 ｇ)"/>コレステロール</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-13" value="13.炭水化物" name="(g/100 g)"/>炭水化物</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-14" value="14.利用可能炭水化物（単糖当量）" name="(g/100 g)"/>利用可能炭水化物（単糖当量）</label></div></li>
+
+<li><div class="checkbox"><label><input type="checkbox" id="chk-all-食物繊維"/><b>食物繊維</b></label></div>
+<ul style="list-style:none;">
+<li><div class="checkbox"><label><input type="checkbox" id="chk-15" value="15.水溶性食物繊維" name="(g/100 g)"/>水溶性食物繊維</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-16" value="16.不溶性食物繊維" name="(g/100 g)"/>不溶性食物繊維</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-17" value="17.食物繊維総量" name="(g/100 g)"/>食物繊維総量</label></div></li>
+</ul>
+</li>
+
+<li><div class="checkbox"><label><input type="checkbox" id="chk-18" value="18.灰分" name="(g/100 g)"/>灰分</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-19" value="19.ナトリウム" name="(mg/100 g)"/>ナトリウム</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-20" value="20.カリウム" name="(mg/100 g)"/>カリウム</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-21" value="21.カルシウム" name="(mg/100 g)"/>カルシウム</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-22" value="22.マグネシウム" name="(mg/100 g)"/>マグネシウム</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-23" value="23.リン" name="(mg/100 g)"/>リン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-24" value="24.鉄" name="(mg/100 g)"/>鉄</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-25" value="25.亜鉛" name="(mg/100 g)"/>亜鉛</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-26" value="26.銅" name="(mg/100 g)"/>銅</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-27" value="27.マンガン" name="(mg/100 g)"/>マンガン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-28" value="28.ヨウ素" name="(µg/100 g)"/>ヨウ素</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-29" value="29.セレン" name="(µg/100 g)"/>セレン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-30" value="30.クロム" name="(µg/100 g)"/>クロム</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-31" value="31.モリブデン" name="(µg/100 g)"/>モリブデン</label></div></li>
+
+<li><div class="checkbox"><label><input type="checkbox" id="chk-all-ビタミンA"/><b>ビタミンA</b></label></div>
+<ul style="list-style:none;">
+<li><div class="checkbox"><label><input type="checkbox" id="chk-32" value="32.レチノール" name="(µg/100 g)"/>レチノール</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-33" value="33.α-カロテン" name="(µg/100 g)"/>α-カロテン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-34" value="34.β-カロテン" name="(µg/100 g)"/>β-カロテン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-35" value="35.β-クリプトキサンチン" name="(µg/100 g)"/>β-クリプトキサンチン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-36" value="36.β-カロテン当量" name="(µg/100 g)"/>β-カロテン当量</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-37" value="37.レチノール活性当量" name="(µg/100 g)"/>レチノール活性当量</label></div></li>
+</ul>
+</li>
+
+<li><div class="checkbox"><label><input type="checkbox" id="chk-38" value="38.ビタミンD" name="(µg/100 g)"/>ビタミンD</label></div></li>
+
+<li><div class="checkbox"><label><input type="checkbox" id="chk-all-ビタミンE"/><b>ビタミンE</b></label></div>
+<ul style="list-style:none;">
+<li><div class="checkbox"><label><input type="checkbox" id="chk-39" value="39.α-トコフェロール" name="(mg/100 g)"/>α-トコフェロール</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-40" value="40.β-トコフェロール" name="(mg/100 g)"/>β-トコフェロール</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-41" value="41.γ-トコフェロール" name="(mg/100 g)"/>γ-トコフェロール</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-42" value="42.δ-トコフェロール" name="(mg/100 g)"/>δ-トコフェロール</label></div></li>
+</ul>
+</li>
+
+<li><div class="checkbox"><label><input type="checkbox" id="chk-43" value="43.ビタミンK" name="(µg/100 g)"/>ビタミンK</label></div></li>
+
+<li><div class="checkbox"><label><input type="checkbox" id="chk-all-ビタミンB"/><b>ビタミンB</b></label></div>
+<ul style="list-style:none;">
+<li><div class="checkbox"><label><input type="checkbox" id="chk-44" value="44.ビタミンB1" name="(mg/100 g)"/>ビタミンB1</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-45" value="45.ビタミンB2" name="(mg/100 g)"/>ビタミンB2</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-46" value="46.ナイアシン" name="(mg/100 g)"/>ナイアシン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-64" value="64.ナイアシン当量" name="(g/100 g)"/>ナイアシン当量</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-47" value="47.ビタミンB6" name="(mg/100 g)"/>ビタミンB6</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-48" value="48.ビタミンB12" name="(µg/100 g)"/>ビタミンB12</label></div></li>
+</ul>
+</li>
+
+<li><div class="checkbox"><label><input type="checkbox" id="chk-49" value="49.葉酸" name="(µg/100 g)"/>葉酸</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-50" value="50.パントテン酸" name="(mg/100 g)"/>パントテン酸</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-51" value="51.ビオチン" name="(µg/100 g)"/>ビオチン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-52" value="52.ビタミンC" name="(mg/100 g)"/>ビタミンC</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-53" value="53.食塩相当量" name="(g/100 g)"/>食塩相当量</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-54" value="54.アルコール" name="(g/100 g)"/>アルコール</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-55" value="55.硝酸イオン" name="(g/100 g)"/>硝酸イオン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-56" value="56.テオブロミン" name="(g/100 g)"/>テオブロミン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-57" value="57.カフェイン" name="(g/100 g)"/>カフェイン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-58" value="58.タンニン" name="(g/100 g)"/>タンニン</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-59" value="59.ポリフェノール" name="(g/100 g)"/>ポリフェノール</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-60" value="60.酢酸" name="(g/100 g)"/>酢酸</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-61" value="61.調理油" name="(g/100 g)"/>調理油</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-62" value="62.有機酸" name="(g/100 g)"/>有機酸</label></div></li>
+<li><div class="checkbox"><label><input type="checkbox" id="chk-63" value="63.重量変化率" name="(%)"/>重量変化率</label></div></li>
+</ul>
+<hr>
+<br>
+  <div class="block">
+    <button type="button" class="btn-all-select">全て選択</button><br>
+    <button type="button" class="btn-all-clear">全て解除</button><br>
+    <button type="button" class="btn-set-property">現在の項目行を登録する</button><br>
+    <button type="button" class="btn-get-property">登録した項目行を呼び出す</button><br>
+    <button type="button" class="action btn-ok">OK</button>
+  </div>
+</div>
+  
+ <?!= include('JS_項目行の選択.js.html'); ?>
+ <?!= include('JS_BlackUI.js.html'); ?>
+
+  </body>
+  
+</html>
+
+
